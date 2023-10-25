@@ -1,4 +1,4 @@
-# Create virtual machine
+# Create virtual machine 1
 resource "azurerm_windows_virtual_machine" "windows_vm" {
   name                = var.vm_name
   resource_group_name = var.rg_name
