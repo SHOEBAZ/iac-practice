@@ -1,0 +1,28 @@
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+    <tbody>
+        <tr>
+            <td>{% raw %}{{ 'some sample text' | upper }}{% endraw %}</td>
+            <td>{{ 'some sample text' | upper }}</td>
+        </tr>
+        <tr>
+            <td>{% raw %}{{ 'SOME SAMPLE TEXT' | lower }}{% endraw %}</td>
+            <td>{{ 'SOME SAMPLE CASE TEXT' | lower }}</td>
+        </tr>
+        <tr>
+            <td>{% raw %}{{ 'some sample text' | capitalize }}{% endraw %}</td>
+            <td>{{ 'some sample text' | capitalize }}</td>
+        </tr>
+        <tr>
+            <td>{% raw %}{{ 'some sample text' | reverse }}{% endraw %}</td>
+            <td>{{ 'some sample text' | reverse }}</td>
+        </tr>
+        <tr>
+            <td>{% raw %}{{ [ 100, 37, 45, 65, 60, 78 ] | min }}{% endraw %}</td>
+            <td>{{ [ 100, 37, 45, 65, 60, 78 ] | min }}</td>
+        </tr>
+        <tr>
+            <td>{% raw %}{{ [ 3, 4, 3, 3, 4, 2, 2 ] | unique }}{% endraw %}</td>
+            <td>{{ [ 3, 4, 3, 3, 4, 2, 2 ] | unique }}</td>
+        </tr>
+    </tbody>
+</table>

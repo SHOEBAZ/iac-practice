@@ -1,0 +1,78 @@
+<h1 style="margin-left:250px"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif"><span style="font-size:18px"><strong>Ansible month-4 lab demo</strong></span></span></h1>
+  
+<p style="margin-left:110px">This month we covered Jinja2 templates (filters, conditionals, loops, raw, and comments</p>
+  
+<p><span style="font-size:16px"><strong>Example of using ansible facts in a template</strong></span></p>
+ 
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+    <tbody>
+        <tr>
+            <td>hostname</td>
+            <td>{% raw %}{{ ansible_facts['hostname'] }}{% endraw %}</td>
+            <td>{{ ansible_facts['hostname'] }}</td>
+        </tr>
+        <tr>
+            <td>distro</td>
+            <td>{% raw %}{{ ansible_facts['distribution'] }}{% endraw %}</td>
+            <td>{{ ansible_facts['distribution'] }}</td>
+        </tr>
+        <tr>
+            <td>total mem</td>
+            <td>{% raw %}{{ ansible_facts['memtotal_mb'] }}{% endraw %}</td>
+            <td>{{ ansible_facts['memtotal_mb'] }}</td>
+        </tr>
+        <tr>
+            <td>free mem</td>
+            <td>{% raw %}{{ ansible_facts['memfree_mb'] }}{% endraw %}</td>
+            <td>{{ ansible_facts['memfree_mb'] }}</td>
+        </tr>
+    </tbody>
+</table>
+ 
+<br>
+ 
+<p><span style="font-size:16px"><strong>Example of using loops in a template</strong></span></p>
+{# Here is an example of using comments inside a jinja template #}
+{# The actual loop below is kind of ugly since we are mixing jinja with html #}
+{# The basic loop looks like this #}
+<pre><code>
+{% raw %}
+{% for item in fruit %}
+  {{ item }}
+{% endfor %}
+{% endraw %}</code></pre>
+<table border="1" cellpadding="1" cellspacing="1" style="width:800px">
+    <tbody>
+{% for item in fruit %}
+  <tr>
+  <td>{{ item }}</td>
+  </tr>
+{% endfor %}
+    </tbody>
+</table>
+ 
+<br>
+ 
+<p><span style="font-size:16px"><strong>Example of using conditionals in a template</strong></span></p>
+<pre>
+<code>{% raw %}
+{% if show_my_var %}
+  {{ my_var }}
+{% else %}
+  {{your_var}}
+{% endif %}
+{% endraw %}</code></pre>
+{% if show_my_var %}
+  {{ my_var }}
+{% else %}
+  {{your_var}}
+{% endif %}
+ 
+{% if include_block %}
+  <p><span style="font-size:16px"><strong>Example of including a template in another template</strong></span></p>
+  {% include 'block.j2' %}
+{% endif %}
+ 
+<p style="margin-left:320px"><strong><span style="font-size:20px">{{ your_name }}</span></strong></p>
+  
+<p> </p>

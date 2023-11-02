@@ -1,0 +1,49 @@
+---
+- name: Install and Configure IIS
+  hosts: all
+  gather_facts: true
+ 
+  vars:
+    your_name: 'Sayed Shoeb'
+    fruit: ['banana', 'apple', 'orange', 'grape', 'tomato']
+    my_var: 'This is my_var'
+    your_var: 'This is your_var'
+    show_my_var: true
+    include_block: true
+ 
+  tasks:
+    - name: Install IIS
+      ansible.windows.win_feature:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - Web-Server
+        - Web-Mgmt-Console
+        - Web-Mgmt-Tools
+        - Web-Static-Content
+      notify: IIS_running
+ 
+    - name: Remove Default Site
+      community.windows.win_iis_website:
+        name: 'Default Web Site'
+        state: absent
+ 
+    - name: Copy Index Page to web server
+      ansible.windows.win_template:
+        src: templates/month-4.html.j2
+        dest: C:\Inetpub\wwwroot\index.html
+ 
+    - name: Configure site
+      community.windows.win_iis_website:
+        name: 'Ansible Lab Month-4'
+        physical_path: 'C:\inetpub\wwwroot'
+        state: started
+        port: 80
+        ssl: true
+      notify: IIS_running
+  
+  handlers:
+    - name: IIS_running
+      ansible.windows.win_service:
+        name: W3Svc
+        state: started
