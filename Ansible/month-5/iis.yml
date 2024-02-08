@@ -1,0 +1,17 @@
+---
+- name: Install and Configure IIS
+  hosts: all
+  gather_facts: true
+ 
+  tasks:
+    - name: Import windows role
+      ansible.builtin.import_role:
+        name: windows
+      vars:
+        windows_update_category: 'Updates'
+ 
+    - name: Import iis role
+      ansible.builtin.import_role:
+        name: iis
+      vars:
+        iis_your_name: 'SHOEB SAYED'

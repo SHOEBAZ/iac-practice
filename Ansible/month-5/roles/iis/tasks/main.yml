@@ -1,0 +1,31 @@
+---
+# tasks file for iis
+- name: Install IIS
+  ansible.windows.win_feature:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - Web-Server
+    - Web-Mgmt-Console
+    - Web-Mgmt-Tools
+    - Web-Static-Content
+  notify: IIS_running
+ 
+- name: Remove Default Site
+  community.windows.win_iis_website:
+    name: 'Default Web Site'
+    state: absent
+ 
+- name: Copy Index Page to web server
+  ansible.windows.win_template:
+    src: templates/month-5.html.j2
+    dest: C:\Inetpub\wwwroot\index.html
+ 
+- name: Configure site
+  community.windows.win_iis_website:
+    name: 'Ansible Lab Month-5'
+    physical_path: 'C:\inetpub\wwwroot'
+    state: started
+    port: 80
+    ssl: true
+  notify: IIS_running

@@ -1,0 +1,6 @@
+---
+# handlers file for iis
+- name: IIS_running
+  ansible.windows.win_service:
+    name: W3Svc
+    state: started

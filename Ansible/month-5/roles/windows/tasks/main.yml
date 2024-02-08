@@ -1,0 +1,7 @@
+---
+# tasks file for windows
+- name: Install updates with automatic reboots
+  ansible.windows.win_updates:
+    category_names:
+      - "{{ windows_update_category }}"
+    reboot: true
